@@ -1,0 +1,6 @@
+{
+  "name": "MMM Advocates - Insights",
+  "description": "Editorial insights, legal updates, client alerts and publications for Mundui, Murai & Mwaniki Advocates LLP, Nairobi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
