@@ -1,0 +1,27 @@
+<svg width="1500" height="456" viewBox="0 0 1500 456" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Woven 3-Loop Emblem Background scaled across band -->
+  <g stroke="#2C364A" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Loop 1 (Left) -->
+    <circle cx="350" cy="228" r="300" stroke-width="32" fill="none"/>
+    <circle cx="350" cy="228" r="230" stroke-width="12" stroke-dasharray="24 24" fill="none"/>
+    <circle cx="350" cy="228" r="160" stroke-width="24" fill="none"/>
+    <circle cx="350" cy="228" r="90" stroke-width="8" fill="none"/>
+
+    <!-- Loop 2 (Center) -->
+    <circle cx="750" cy="228" r="300" stroke-width="32" fill="none"/>
+    <circle cx="750" cy="228" r="230" stroke-width="12" stroke-dasharray="24 24" fill="none"/>
+    <circle cx="750" cy="228" r="160" stroke-width="24" fill="none"/>
+    <circle cx="750" cy="228" r="90" stroke-width="8" fill="none"/>
+
+    <!-- Loop 3 (Right) -->
+    <circle cx="1150" cy="228" r="300" stroke-width="32" fill="none"/>
+    <circle cx="1150" cy="228" r="230" stroke-width="12" stroke-dasharray="24 24" fill="none"/>
+    <circle cx="1150" cy="228" r="160" stroke-width="24" fill="none"/>
+    <circle cx="1150" cy="228" r="90" stroke-width="8" fill="none"/>
+
+    <!-- Interlocking Chevron Weave Geometry -->
+    <path d="M150 228 L250 160 M250 296 L350 228 M350 228 L450 160 M450 296 L550 228 M550 228 L650 160 M650 296 L750 228" stroke-width="14"/>
+    <path d="M750 228 L850 160 M850 296 L950 228 M950 228 L1050 160 M1050 296 L1150 228 M1150 228 L1250 160 M1250 296 L1350 228" stroke-width="14"/>
+    <path d="M200 120 L300 228 L200 336 M600 120 L700 228 L600 336 M1000 120 L1100 228 L1000 336" stroke-width="16"/>
+  </g>
+</svg>

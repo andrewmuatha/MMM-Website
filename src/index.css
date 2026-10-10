@@ -10,8 +10,24 @@
 
   h1, h2, h3, .font-serif {
     font-family: var(--font-serif);
-    font-feature-settings: 'cv01', 'cv02';
+    font-variation-settings: 'opsz' 72;
   }
+}
+
+.font-display {
+  font-family: 'Newsreader', Georgia, serif;
+  font-variation-settings: 'opsz' 72;
+}
+
+.font-body-serif {
+  font-family: 'Newsreader', Georgia, serif;
+  font-variation-settings: 'opsz' 16;
+}
+
+.font-label {
+  font-family: 'Instrument Sans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 /* Kuba cloth geometric architectural SVG pattern */

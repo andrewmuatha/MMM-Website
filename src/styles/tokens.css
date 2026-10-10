@@ -1,16 +1,28 @@
 :root {
   /* Colours */
-  --navy: #16233F;
-  --gold: #C6A455;
-  --burgundy: #7A2142;
   --paper: #FDFCF8;
-  --paper-alt: #F6F3EC;
+  --navy: #16233F;
   --ink: #1A1815;
   --warm-gray: #86847A;
+  --rule-grey: #86847A;
+  --gold: #C6A455;
+  --burgundy: #7A2142;
+  --utility-bar: #3A3835;
+  --mmm-navy: #162035;
+  --mmm-mark: #2C364A;
+  --cta-navy: #1D2941;
+  --statement-left: #461326;
+  --statement-right: #6A3448;
+  --insights-bg: #F8FAFC;
+  --subscribe-bg: #F7F3E7;
+  --subscribe-border: #D5CCC4;
+  --footer-burgundy: #6B1E3F;
+  --footer-rule: #D9D2D0;
   --muted-text: #5F5D55;
+  --paper-alt: #F6F3EC;
 
   /* Typography - Font Families */
-  --font-serif: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Newsreader', Georgia, serif;
   --font-sans: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Typography - Desktop (1440px) */

@@ -1,95 +1,85 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface FooterProps {
   onNavigate?: (path: string) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
     if (onNavigate) {
       e.preventDefault();
       onNavigate(path);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
-  return (
-    <footer className="bg-[#F6F3EC] text-[#1A1815] border-t border-[#1A1815]/10 pt-16 sm:pt-20 pb-12">
-      <div className="max-w-[1280px] mx-auto px-5 sm:px-10 lg:px-12 xl:px-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
-          {/* Column 1: Brand & Nairobi Registry (cols 1-5) */}
-          <div className="lg:col-span-5 space-y-4">
-            <div className="flex items-center gap-3">
-              <svg
-                width="28"
-                height="15"
-                viewBox="0 0 46 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-[#16233F]"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.2" />
-                <circle cx="23" cy="12" r="9" stroke="currentColor" strokeWidth="2.2" />
-                <circle cx="34" cy="12" r="9" stroke="currentColor" strokeWidth="2.2" />
-                <circle cx="23" cy="12" r="3.2" fill="#C6A455" />
-              </svg>
-              <span className="font-serif text-[18px] font-semibold text-[#16233F]">
-                Mundui, Murai and Mwaniki Advocates LLP
-              </span>
-            </div>
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
 
-            <p className="text-[12px] uppercase tracking-[0.14em] text-[#5F5D55]">
-              Excellence · Integrity · Partnership
+  return (
+    <footer className="w-full bg-[#FDFCF8] text-[#1A1815] pt-[96px] pb-[48px] border-t border-[#D9D2D0]/40">
+      <div className="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-16">
+        {/* 4-Column Grid: starting at x=64, 515, 740, 965 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-y-12 gap-x-8">
+          {/* Column 1 (x=64, span 4 cols): Firm Name, Tagline, Address, Phone */}
+          <div className="lg:col-span-4 space-y-3">
+            <h2 className="font-['Newsreader',serif] text-[22px] font-semibold uppercase leading-[1.25] text-[#6B1E3F]">
+              Mundui, Murai and Mwaniki
+              <br />
+              Advocates LLP
+            </h2>
+
+            <p className="text-[12px] font-semibold uppercase tracking-[0.1em] text-[#3A3835] font-['Instrument_Sans',sans-serif] pt-1">
+              MASTER · MANAGE · MULTIPLY
             </p>
 
-            <div className="text-[14px] leading-[1.65] text-[#5F5D55] pt-2 space-y-1">
-              <p className="font-medium text-[#1A1815]">Nairobi Registry:</p>
-              <p>Delta Corner Annex, 7th Floor, Ring Road Westlands</p>
-              <p>Off Chiromo Lane</p>
-              <p>P.O. Box 48291-00100, Nairobi, Kenya</p>
+            <div className="pt-6 space-y-1 font-['Instrument_Sans',sans-serif]">
+              <p className="text-[13px] font-semibold text-[#6B1E3F] mb-1">
+                Nairobi office:
+              </p>
+              <p className="text-[14px] leading-[22px] text-[#3A3835]">
+                Longonot Place, 7th Floor, Right Wing
+              </p>
+              <p className="text-[14px] leading-[22px] text-[#3A3835]">
+                Kijabe Street
+              </p>
+              <p className="text-[14px] leading-[22px] text-[#3A3835]">
+                Nairobi, Kenya
+              </p>
             </div>
 
-            <div className="pt-2 text-[14px] text-[#5F5D55] space-y-1">
-              <p>
-                <span className="font-medium text-[#1A1815]">Direct: </span>
-                <a
-                  href="tel:+254713874830"
-                  className="hover:text-[#7A2142] transition-colors focus-visible:outline-2 focus-visible:outline-[#16233F]"
-                >
-                  +254 713 874 830
-                </a>
-              </p>
-              <p>
-                <span className="font-medium text-[#1A1815]">Enquiries: </span>
-                <a
-                  href="/contact"
-                  className="hover:text-[#7A2142] underline transition-colors focus-visible:outline-2 focus-visible:outline-[#16233F]"
-                >
-                  Via our enquiry form
-                </a>
-              </p>
+            <div className="pt-3 font-['Instrument_Sans',sans-serif]">
+              <span className="text-[12px] font-semibold uppercase text-[#3A3835] mr-2">
+                DIRECT:
+              </span>
+              <a
+                href="tel:+254713874830"
+                className="text-[14px] text-[#3A3835] hover:text-[#16233F] transition-colors"
+              >
+                +254 713 874 830
+              </a>
             </div>
           </div>
 
-          {/* Column 2: Practice Areas (cols 6-8) */}
-          <div className="lg:col-span-4 space-y-4">
-            <h3 className="text-[12px] uppercase tracking-[0.14em] font-semibold text-[#16233F]">
-              <a
-                href="/practice-areas"
-                onClick={(e) => handleLinkClick(e, '/practice-areas')}
-                className="hover:underline"
-              >
-                Practice Areas
-              </a>
+          {/* Column 2 (x=515, span 2 cols): Practice Areas */}
+          <div className="lg:col-span-2 lg:col-start-5 space-y-3">
+            <h3 className="text-[12px] font-semibold uppercase tracking-[0.1em] text-[#6B1E3F] font-['Instrument_Sans',sans-serif]">
+              PRACTICE AREAS
             </h3>
-            <ul className="space-y-2.5 text-[14px] text-[#5F5D55]">
+            <div className="w-full h-[1px] bg-[#D9D2D0] mb-4" aria-hidden="true" />
+            <ul className="space-y-4 text-[14px] text-[#3A3835] font-['Instrument_Sans',sans-serif]">
               <li>
                 <a
                   href="/practice-areas/tmt"
                   onClick={(e) => handleLinkClick(e, '/practice-areas/tmt')}
                   className="hover:text-[#16233F] transition-colors"
                 >
-                  Technology, Media &amp; Telecommunications (TMT)
+                  TMT
                 </a>
               </li>
               <li>
@@ -112,30 +102,30 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="/practice-areas/property-real-estate"
-                  onClick={(e) => handleLinkClick(e, '/practice-areas/property-real-estate')}
+                  href="/practice-areas/property"
+                  onClick={(e) => handleLinkClick(e, '/practice-areas/property')}
                   className="hover:text-[#16233F] transition-colors"
                 >
-                  Property &amp; Real Estate
+                  Property
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Firm & Counsel (cols 9-12) */}
-          <div className="lg:col-span-3 space-y-4">
-            <h3 className="text-[12px] uppercase tracking-[0.14em] font-semibold text-[#16233F]">
-              Firm &amp; Counsel
+          {/* Column 3 (x=740, span 2 cols): The Firm */}
+          <div className="lg:col-span-2 lg:col-start-7 space-y-3">
+            <h3 className="text-[12px] font-semibold uppercase tracking-[0.1em] text-[#6B1E3F] font-['Instrument_Sans',sans-serif]">
+              THE FIRM
             </h3>
-            <ul className="space-y-2.5 text-[14px] text-[#5F5D55]">
+            <div className="w-full h-[1px] bg-[#D9D2D0] mb-4" aria-hidden="true" />
+            <ul className="space-y-4 text-[14px] text-[#3A3835] font-['Instrument_Sans',sans-serif]">
               <li>
-                <a href="/the-firm" className="hover:text-[#16233F] transition-colors">
-                  About The Firm
-                </a>
-              </li>
-              <li>
-                <a href="/the-firm#ethos" className="hover:text-[#16233F] transition-colors">
-                  Our Ethos
+                <a
+                  href="/about"
+                  onClick={(e) => handleLinkClick(e, '/about')}
+                  className="hover:text-[#16233F] transition-colors"
+                >
+                  About
                 </a>
               </li>
               <li>
@@ -144,38 +134,90 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={(e) => handleLinkClick(e, '/our-team')}
                   className="hover:text-[#16233F] transition-colors"
                 >
-                  Partners
+                  Our team
                 </a>
               </li>
               <li>
                 <a
-                  href="/our-team#associates"
-                  onClick={(e) => handleLinkClick(e, '/our-team#associates')}
+                  href="/insights"
+                  onClick={(e) => handleLinkClick(e, '/insights')}
                   className="hover:text-[#16233F] transition-colors"
                 >
-                  Associates
+                  Insights
                 </a>
               </li>
               <li>
-                <a href="/the-firm#administration" className="hover:text-[#16233F] transition-colors">
-                  Administration
+                <a
+                  href="/contact"
+                  onClick={(e) => handleLinkClick(e, '/contact')}
+                  className="hover:text-[#16233F] transition-colors"
+                >
+                  Contact
                 </a>
               </li>
             </ul>
           </div>
-          {/* Note: The newsletter signup column is strictly removed here because /insights has the dedicated newsletter band, avoiding duplicate forms per Prompt 0 section 4.1 */}
+
+          {/* Column 4 (x=965 to x=1376, span 4 cols): Newsletter */}
+          <div className="lg:col-span-4 lg:col-start-9 space-y-3">
+            <h3 className="text-[12px] font-semibold uppercase tracking-[0.1em] text-[#6B1E3F] font-['Instrument_Sans',sans-serif]">
+              LEGAL GAZETTE &amp; NEWSLETTER
+            </h3>
+            <div className="w-full h-[1px] bg-[#D9D2D0] mb-4" aria-hidden="true" />
+            <p className="text-[14px] leading-[22px] text-[#3A3835] font-['Instrument_Sans',sans-serif]">
+              Selected legal updates and client alerts from MMM Advocates.
+            </p>
+
+            <form onSubmit={handleSubmit} className="pt-4 space-y-3">
+              <div className="flex flex-col sm:flex-row items-stretch">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="EMAIL ADDRESS"
+                  required
+                  className="w-full sm:w-[286px] h-[56px] px-4 bg-[#FDF9ED] border border-[#D9D2D0] text-[13px] font-['Instrument_Sans',sans-serif] placeholder-[#86847A] uppercase text-[#1A1815] focus:outline-none focus:border-[#16233F] rounded-none"
+                />
+                <button
+                  type="submit"
+                  className="w-full sm:w-[125px] h-[56px] bg-[#1C1C15] hover:bg-[#3A3835] text-[#FDFCF8] text-[12px] font-semibold uppercase tracking-[0.08em] font-['Instrument_Sans',sans-serif] shrink-0 rounded-none transition-colors"
+                >
+                  SUBSCRIBE
+                </button>
+              </div>
+
+              {submitted && (
+                <p className="text-[13px] text-[#6B1E3F] font-['Instrument_Sans',sans-serif] pt-1">
+                  Subscriptions open soon. In the meantime, call +254 713 874 830.
+                </p>
+              )}
+            </form>
+          </div>
         </div>
 
-        {/* Bottom Rule and Legal Notice */}
-        <div className="pt-8 border-t border-[#1A1815]/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[13px] text-[#5F5D55]">
-          <p>© 2018-2026 Mundui, Murai and Mwaniki Advocates LLP. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <a href="/privacy-policy" className="hover:text-[#16233F] transition-colors">
-              Privacy policy
+        {/* Bottom Rule: 64px below columns */}
+        <div className="w-full h-[1px] bg-[#D9D2D0] mt-16 mb-8" aria-hidden="true" />
+
+        {/* Bottom Copyright & Legal Links: 32px below rule */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[12px] font-semibold uppercase tracking-[0.06em] text-[#3A3835] font-['Instrument_Sans',sans-serif]">
+          <p>
+            &copy; 2026 MUNDUI, MURAI AND MWANIKI ADVOCATES LLP. ALL RIGHTS RESERVED.
+          </p>
+          <div className="flex items-center gap-4">
+            <a
+              href="/privacy-policy"
+              onClick={(e) => handleLinkClick(e, '/privacy-policy')}
+              className="hover:text-[#16233F] transition-colors"
+            >
+              PRIVACY POLICY
             </a>
-            <span aria-hidden="true">·</span>
-            <a href="/terms-of-engagement" className="hover:text-[#16233F] transition-colors">
-              Terms of engagement
+            <span className="w-1.5 h-1.5 bg-[#C9C3BE]" aria-hidden="true" />
+            <a
+              href="/terms-of-engagement"
+              onClick={(e) => handleLinkClick(e, '/terms-of-engagement')}
+              className="hover:text-[#16233F] transition-colors"
+            >
+              TERMS OF ENGAGEMENT
             </a>
           </div>
         </div>
@@ -183,3 +225,5 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
     </footer>
   );
 };
+
+export default Footer;

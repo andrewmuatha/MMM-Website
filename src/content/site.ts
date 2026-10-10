@@ -13,10 +13,16 @@ export interface SiteContent {
   name: string;
   shortName: string;
   tagline: string;
+  firm: {
+    founded: {
+      year: number;
+      verified: boolean;
+    };
+  };
   address: {
     line1: string;
     line2: string;
-    poBox: string;
+    city: string;
     phone: string;
   };
   team: {
@@ -40,11 +46,17 @@ export interface SiteContent {
 export const site: SiteContent = {
   name: 'Mundui, Murai & Mwaniki Advocates LLP',
   shortName: 'MMM Advocates',
-  tagline: 'Excellence, integrity, partnership',
+  tagline: 'MASTER · MANAGE · MULTIPLY',
+  firm: {
+    founded: {
+      year: 2018,
+      verified: false,
+    },
+  },
   address: {
-    line1: 'Delta Corner Annex, 7th Floor, Ring Road Westlands',
-    line2: 'Off Chiromo Lane',
-    poBox: 'P.O. Box 48291-00100, Nairobi, Kenya',
+    line1: 'Longonot Place, 7th Floor, Right Wing',
+    line2: 'Kijabe Street',
+    city: 'Nairobi, Kenya',
     phone: '+254 713 874 830',
   },
   team: {

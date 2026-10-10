@@ -1,0 +1,31 @@
+<svg width="420" height="50" viewBox="0 0 420 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 3-Loop Interlocking Woven Mark -->
+  <g class="mmm-mark">
+    <!-- Loop 1 (Left) -->
+    <circle cx="28" cy="25" r="18" stroke="#16233F" stroke-width="3" fill="none"/>
+    <circle cx="28" cy="25" r="13" stroke="#16233F" stroke-width="1.2" stroke-dasharray="2 3" fill="none"/>
+    <circle cx="28" cy="25" r="8" stroke="#16233F" stroke-width="2" fill="none"/>
+
+    <!-- Loop 2 (Center) -->
+    <circle cx="48" cy="25" r="18" stroke="#16233F" stroke-width="3" fill="none"/>
+    <circle cx="48" cy="25" r="13" stroke="#16233F" stroke-width="1.2" stroke-dasharray="2 3" fill="none"/>
+    <circle cx="48" cy="25" r="8" stroke="#16233F" stroke-width="2" fill="none"/>
+    <!-- Center Gold Diamond Anchor -->
+    <rect x="46" y="23" width="4" height="4" transform="rotate(45 48 25)" fill="#C6A455"/>
+
+    <!-- Loop 3 (Right) -->
+    <circle cx="68" cy="25" r="18" stroke="#16233F" stroke-width="3" fill="none"/>
+    <circle cx="68" cy="25" r="13" stroke="#16233F" stroke-width="1.2" stroke-dasharray="2 3" fill="none"/>
+    <circle cx="68" cy="25" r="8" stroke="#16233F" stroke-width="2" fill="none"/>
+
+    <!-- Woven chevron ribs -->
+    <path d="M16 25 L24 21 M24 29 L32 25 M36 25 L44 21 M44 29 L52 25 M56 25 L64 21 M64 29 L72 25" stroke="#16233F" stroke-width="1.2"/>
+  </g>
+
+  <!-- Thin Vertical Rule -->
+  <line x1="102" y1="8" x2="102" y2="42" stroke="#1A1815" stroke-opacity="0.3" stroke-width="1"/>
+
+  <!-- Two-line Wordmark -->
+  <text x="118" y="23" font-family="'Newsreader', Georgia, serif" font-size="17" font-weight="500" fill="#16233F" letter-spacing="0.01em">Mundui, Murai &amp; Mwaniki</text>
+  <text x="118" y="38" font-family="'Newsreader', Georgia, serif" font-size="12.5" font-weight="400" fill="#5F5D55" letter-spacing="0.02em">Advocates LLP</text>
+</svg>

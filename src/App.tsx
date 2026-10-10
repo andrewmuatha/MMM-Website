@@ -15,6 +15,7 @@ import { PracticeDetailView } from './components/practice/PracticeDetailView';
 import { PracticeOverviewView } from './components/practice/PracticeOverviewView';
 import { OurTeam } from './pages/OurTeam';
 import { PartnerProfile } from './pages/PartnerProfile';
+import { Home } from './pages/Home';
 import { site, Partner } from './content/site';
 import {
   AUTHORS,
@@ -38,7 +39,7 @@ export default function App() {
   const [activePartner, setActivePartner] = useState<Partner | null>(null);
   const [isPracticeOverview, setIsPracticeOverview] = useState(false);
   const [currentPath, setCurrentPath] = useState<string>(
-    typeof window !== 'undefined' ? window.location.pathname : '/insights'
+    typeof window !== 'undefined' ? window.location.pathname : '/'
   );
 
   // Helper to resolve archive context from URL
@@ -121,6 +122,28 @@ export default function App() {
     const handleLocationChange = () => {
       const path = window.location.pathname;
       setCurrentPath(path);
+
+      // 0. Home Page: /
+      if (path === '/' || path === '') {
+        setCurrentPath('/');
+        setActivePartner(null);
+        setActivePractice(null);
+        setActiveArticle(null);
+        setActiveArchive(null);
+        setIsPracticeOverview(false);
+        return;
+      }
+
+      // 0b. Insights Editorial Landing: /insights
+      if (path === '/insights' || path === '/insights/') {
+        setCurrentPath('/insights');
+        setActivePartner(null);
+        setActivePractice(null);
+        setActiveArticle(null);
+        setActiveArchive(null);
+        setIsPracticeOverview(false);
+        return;
+      }
 
       // 1. Redirect /expertise to /practice-areas (301 redirect requirement)
       if (path === '/expertise' || path === '/expertise/') {
@@ -282,7 +305,19 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const navigateToHome = () => {
+    setActivePartner(null);
+    setActiveArticle(null);
+    setActiveArchive(null);
+    setActivePractice(null);
+    setIsPracticeOverview(false);
+    setCurrentPath('/');
+    window.history.pushState({}, '', '/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const navigateToLanding = () => {
+    setActivePartner(null);
     setActiveArticle(null);
     setActiveArchive(null);
     setActivePractice(null);
@@ -407,7 +442,9 @@ export default function App() {
 
   // Generic router dispatcher for Header/Footer navigation
   const handleGlobalNavigate = (path: string) => {
-    if (path === '/' || path === '/insights') {
+    if (path === '/' || path === '') {
+      navigateToHome();
+    } else if (path === '/insights') {
       navigateToLanding();
     } else if (path === '/our-team' || path === '/our-people') {
       navigateToTeam();
@@ -492,7 +529,7 @@ export default function App() {
           <PartnerProfile
             partner={activePartner}
             onNavigateTeam={navigateToTeam}
-            onNavigateHome={navigateToLanding}
+            onNavigateHome={navigateToHome}
             onNavigatePractice={navigateToPractice}
             onNavigateArticle={navigateToArticle}
           />
@@ -501,7 +538,7 @@ export default function App() {
              0b. OUR TEAM PAGE (/our-team)
              ======================================================== */
           <OurTeam
-            onNavigateHome={navigateToLanding}
+            onNavigateHome={navigateToHome}
             onSelectPartner={navigateToPartner}
           />
         ) : activePractice ? (
@@ -513,7 +550,7 @@ export default function App() {
             allInsights={CMS_INSIGHTS}
             onSelectPractice={navigateToPractice}
             onNavigateOverview={navigateToPracticeOverview}
-            onNavigateHome={navigateToLanding}
+            onNavigateHome={navigateToHome}
             onSelectInsight={navigateToArticle}
           />
         ) : isPracticeOverview ? (
@@ -522,7 +559,7 @@ export default function App() {
              ======================================================== */
           <PracticeOverviewView
             onSelectPractice={navigateToPractice}
-            onNavigateHome={navigateToLanding}
+            onNavigateHome={navigateToHome}
           />
         ) : activeArticle ? (
           /* ========================================================
@@ -530,7 +567,7 @@ export default function App() {
              ======================================================== */
           <ArticleView
             article={activeArticle}
-            onNavigateHome={navigateToLanding}
+            onNavigateHome={navigateToHome}
             onSelectArticle={navigateToArticle}
             onNavigateCategory={navigateToCategoryArchive}
             onNavigateTopic={navigateToTopicArchive}
@@ -542,12 +579,17 @@ export default function App() {
           <ArchiveView
             context={activeArchive}
             allItems={CMS_INSIGHTS}
-            onNavigateHome={navigateToLanding}
+            onNavigateHome={navigateToHome}
             onSelectArticle={navigateToArticle}
             onNavigateCategory={navigateToCategoryArchive}
             onNavigateTopic={navigateToTopicArchive}
             onNavigateAuthor={navigateToAuthorArchive}
           />
+        ) : currentPath === '/' || currentPath === '' ? (
+          /* ========================================================
+             4b. HOME PAGE (/)
+             ======================================================== */
+          <Home onNavigate={handleGlobalNavigate} />
         ) : isZeroContent ? (
           /* ========================================================
              5. EXACT ZERO-CONTENT STATE

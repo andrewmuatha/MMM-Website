@@ -1,0 +1,8 @@
+<svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 110px geometric nested diamond tile at 6% opacity on CTA navy -->
+  <rect x="55" y="0" width="77.78" height="77.78" transform="rotate(45 55 0)" stroke="#FDFCF8" stroke-opacity="0.06" stroke-width="1.2" fill="none"/>
+  <rect x="55" y="15" width="56.57" height="56.57" transform="rotate(45 55 15)" stroke="#FDFCF8" stroke-opacity="0.05" stroke-width="1" fill="none"/>
+  <rect x="55" y="30" width="35.36" height="35.36" transform="rotate(45 55 30)" stroke="#FDFCF8" stroke-opacity="0.05" stroke-width="1" fill="none"/>
+  <line x1="0" y1="55" x2="110" y2="55" stroke="#FDFCF8" stroke-opacity="0.04" stroke-width="0.8"/>
+  <line x1="55" y1="0" x2="55" y2="110" stroke="#FDFCF8" stroke-opacity="0.04" stroke-width="0.8"/>
+</svg>
