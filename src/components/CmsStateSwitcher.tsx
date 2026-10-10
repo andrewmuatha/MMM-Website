@@ -18,6 +18,10 @@ interface CmsStateSwitcherProps {
   isPracticeOverview?: boolean;
   onNavigatePractice?: (slug: string) => void;
   onNavigatePracticeOverview?: () => void;
+  isTeamPage?: boolean;
+  onNavigateTeam?: () => void;
+  selectedPartner?: { name: string; slug: string } | null;
+  onNavigatePartner?: (slug: string) => void;
 }
 
 export const CmsStateSwitcher: React.FC<CmsStateSwitcherProps> = ({
@@ -33,6 +37,10 @@ export const CmsStateSwitcher: React.FC<CmsStateSwitcherProps> = ({
   isPracticeOverview,
   onNavigatePractice,
   onNavigatePracticeOverview,
+  isTeamPage,
+  onNavigateTeam,
+  selectedPartner,
+  onNavigatePartner,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -53,7 +61,11 @@ export const CmsStateSwitcher: React.FC<CmsStateSwitcherProps> = ({
           <span className="flex items-center gap-2">
             <Settings2 size={14} className="text-[#C6A455]" />
             <span className="font-semibold truncate max-w-[200px]">
-              {selectedPractice
+              {selectedPartner
+                ? `Partner: ${selectedPartner.name}`
+                : isTeamPage
+                ? 'Our Team'
+                : selectedPractice
                 ? `Practice: ${selectedPractice.shortName}`
                 : isPracticeOverview
                 ? 'Practice Overview'
@@ -72,6 +84,81 @@ export const CmsStateSwitcher: React.FC<CmsStateSwitcherProps> = ({
         {/* Collapsible panel */}
         {isOpen && (
           <div className="p-4 border-t border-[#C6A455]/20 space-y-4 max-h-[80vh] overflow-y-auto text-[13px]">
+            {/* Firm Pages Navigation */}
+            <div>
+              <span className="text-[11px] uppercase tracking-wider text-[#C6A455] block mb-2 font-semibold flex items-center gap-1.5">
+                <Briefcase size={13} />
+                <span>Our Team &amp; Profiles:</span>
+              </span>
+              <div className="space-y-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (onNavigateTeam) onNavigateTeam();
+                  }}
+                  className={`w-full text-left px-3 py-1.5 transition-colors ${
+                    isTeamPage && !selectedPartner
+                      ? 'bg-[#C6A455] text-[#16233F] font-semibold'
+                      : 'bg-[#FDFCF8]/5 hover:bg-[#FDFCF8]/10 text-[#FDFCF8]'
+                  }`}
+                >
+                  <div className="font-medium">/our-team (The people behind the counsel)</div>
+                </button>
+
+                {/* Partner Profile templates */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (onNavigatePartner) onNavigatePartner('titus-wanjohi-mundui');
+                  }}
+                  className={`w-full text-left px-3 py-1.5 transition-colors ${
+                    selectedPartner?.slug === 'titus-wanjohi-mundui'
+                      ? 'bg-[#C6A455] text-[#16233F] font-semibold'
+                      : 'bg-[#FDFCF8]/5 hover:bg-[#FDFCF8]/10 text-[#FDFCF8]'
+                  }`}
+                >
+                  <div className="font-medium flex items-center justify-between">
+                    <span>Titus Wanjohi Mundui</span>
+                    <span className="text-[10px] opacity-75 font-mono">/our-team/titus-wanjohi-mundui</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (onNavigatePartner) onNavigatePartner('donald-gitau-murai');
+                  }}
+                  className={`w-full text-left px-3 py-1.5 transition-colors ${
+                    selectedPartner?.slug === 'donald-gitau-murai'
+                      ? 'bg-[#C6A455] text-[#16233F] font-semibold'
+                      : 'bg-[#FDFCF8]/5 hover:bg-[#FDFCF8]/10 text-[#FDFCF8]'
+                  }`}
+                >
+                  <div className="font-medium flex items-center justify-between">
+                    <span>Donald Gitau Murai</span>
+                    <span className="text-[10px] opacity-75 font-mono">/our-team/donald-gitau-murai</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (onNavigatePartner) onNavigatePartner('mwende-mwaniki');
+                  }}
+                  className={`w-full text-left px-3 py-1.5 transition-colors ${
+                    selectedPartner?.slug === 'mwende-mwaniki'
+                      ? 'bg-[#C6A455] text-[#16233F] font-semibold'
+                      : 'bg-[#FDFCF8]/5 hover:bg-[#FDFCF8]/10 text-[#FDFCF8]'
+                  }`}
+                >
+                  <div className="font-medium flex items-center justify-between">
+                    <span>Mwende Mwaniki</span>
+                    <span className="text-[10px] opacity-75 font-mono">/our-team/mwende-mwaniki</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
             {/* Practice Areas Navigation */}
             <div>
               <span className="text-[11px] uppercase tracking-wider text-[#C6A455] block mb-2 font-semibold flex items-center gap-1.5">

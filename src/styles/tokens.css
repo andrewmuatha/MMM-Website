@@ -1,0 +1,76 @@
+:root {
+  /* Colours */
+  --navy: #16233F;
+  --gold: #C6A455;
+  --burgundy: #7A2142;
+  --paper: #FDFCF8;
+  --paper-alt: #F6F3EC;
+  --ink: #1A1815;
+  --warm-gray: #86847A;
+  --muted-text: #5F5D55;
+
+  /* Typography - Font Families */
+  --font-serif: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Typography - Desktop (1440px) */
+  --fs-h1: 72px;
+  --lh-h1: 78px;
+  --fs-h2: 52px;
+  --lh-h2: 58px;
+  --fs-h3: 32px;
+  --lh-h3: 40px;
+  --fs-body-lg: 20px;
+  --lh-body-lg: 32px;
+  --fs-body: 17px;
+  --lh-body: 28px;
+  --fs-small: 14px;
+  --lh-small: 22px;
+  --fs-label: 12px;
+  --lh-label: 16px;
+  --ls-label: 0.14em;
+
+  /* Grid & Spacing */
+  --max-content: 1280px;
+  --gutter: 24px;
+  --margin-desktop: 80px;
+  --margin-laptop: 48px;
+  --margin-tablet: 40px;
+  --margin-mobile: 20px;
+
+  /* Section Padding */
+  --section-py-desktop: 104px;
+  --section-py-tablet: 80px;
+  --section-py-mobile: 60px;
+}
+
+@media (max-width: 1279px) and (min-width: 768px) {
+  :root {
+    --fs-h1: 56px;
+    --lh-h1: 62px;
+    --fs-h2: 44px;
+    --lh-h2: 50px;
+    --fs-h3: 28px;
+    --lh-h3: 36px;
+    --fs-body-lg: 19px;
+    --lh-body-lg: 30px;
+    --fs-body: 17px;
+    --lh-body: 28px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --fs-h1: 40px;
+    --lh-h1: 46px;
+    --fs-h2: 34px;
+    --lh-h2: 40px;
+    --fs-h3: 24px;
+    --lh-h3: 32px;
+    --fs-body-lg: 18px;
+    --lh-body-lg: 28px;
+    --fs-body: 16px;
+    --lh-body: 26px;
+    --gutter: 16px;
+  }
+}

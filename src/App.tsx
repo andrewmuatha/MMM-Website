@@ -13,6 +13,9 @@ import { ArticleView } from './components/article/ArticleView';
 import { ArchiveView } from './components/archive/ArchiveView';
 import { PracticeDetailView } from './components/practice/PracticeDetailView';
 import { PracticeOverviewView } from './components/practice/PracticeOverviewView';
+import { OurTeam } from './pages/OurTeam';
+import { PartnerProfile } from './pages/PartnerProfile';
+import { site, Partner } from './content/site';
 import {
   AUTHORS,
   CATEGORIES_META,
@@ -32,6 +35,7 @@ export default function App() {
   const [activeArticle, setActiveArticle] = useState<InsightItem | null>(null);
   const [activeArchive, setActiveArchive] = useState<ArchiveContext | null>(null);
   const [activePractice, setActivePractice] = useState<PracticeArea | null>(null);
+  const [activePartner, setActivePartner] = useState<Partner | null>(null);
   const [isPracticeOverview, setIsPracticeOverview] = useState(false);
   const [currentPath, setCurrentPath] = useState<string>(
     typeof window !== 'undefined' ? window.location.pathname : '/insights'
@@ -127,6 +131,67 @@ export default function App() {
         setActiveArchive(null);
         setCurrentPath('/practice-areas');
         return;
+      }
+
+      // 1b. Redirect /our-people to /our-team (301 redirect requirement)
+      if (path === '/our-people' || path === '/our-people/') {
+        window.history.replaceState({}, '', '/our-team');
+        setCurrentPath('/our-team');
+        setActivePartner(null);
+        setIsPracticeOverview(false);
+        setActivePractice(null);
+        setActiveArticle(null);
+        setActiveArchive(null);
+        return;
+      }
+
+      if (path.startsWith('/our-people/')) {
+        const slug = path.replace('/our-people/', '').replace(/\/$/, '');
+        const matched = site.team.partners.find((p) => p.slug === slug);
+        if (matched) {
+          window.history.replaceState({}, '', `/our-team/${matched.slug}`);
+          setActivePartner(matched);
+          setCurrentPath(`/our-team/${matched.slug}`);
+          setIsPracticeOverview(false);
+          setActivePractice(null);
+          setActiveArticle(null);
+          setActiveArchive(null);
+          return;
+        }
+        window.history.replaceState({}, '', '/our-team');
+        setCurrentPath('/our-team');
+        setActivePartner(null);
+        setIsPracticeOverview(false);
+        setActivePractice(null);
+        setActiveArticle(null);
+        setActiveArchive(null);
+        return;
+      }
+
+      // 1c. Our Team Page: /our-team
+      if (path === '/our-team' || path === '/our-team/') {
+        setCurrentPath('/our-team');
+        setActivePartner(null);
+        setIsPracticeOverview(false);
+        setActivePractice(null);
+        setActiveArticle(null);
+        setActiveArchive(null);
+        return;
+      }
+
+      // 1d. Partner Profile Template: /our-team/[slug]
+      if (path.startsWith('/our-team/')) {
+        const slug = path.replace('/our-team/', '').replace(/\/$/, '');
+        const matched = site.team.partners.find((p) => p.slug === slug);
+        if (matched) {
+          setActivePartner(matched);
+          setCurrentPath(`/our-team/${matched.slug}`);
+          setIsPracticeOverview(false);
+          setActivePractice(null);
+          setActiveArticle(null);
+          setActiveArchive(null);
+          return;
+        }
       }
 
       // 2. Check /expertise/[slug] redirects
@@ -227,6 +292,31 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const navigateToTeam = () => {
+    setActivePartner(null);
+    setActiveArticle(null);
+    setActiveArchive(null);
+    setActivePractice(null);
+    setIsPracticeOverview(false);
+    setCurrentPath('/our-team');
+    window.history.pushState({}, '', '/our-team');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const navigateToPartner = (slug: string) => {
+    const matched = site.team.partners.find((p) => p.slug === slug);
+    if (matched) {
+      setActivePartner(matched);
+      setIsPracticeOverview(false);
+      setActivePractice(null);
+      setActiveArticle(null);
+      setActiveArchive(null);
+      setCurrentPath(`/our-team/${matched.slug}`);
+      window.history.pushState({}, '', `/our-team/${matched.slug}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const navigateToPractice = (slug: string) => {
     const matched = getPracticeBySlug(slug);
     if (matched) {
@@ -319,6 +409,14 @@ export default function App() {
   const handleGlobalNavigate = (path: string) => {
     if (path === '/' || path === '/insights') {
       navigateToLanding();
+    } else if (path === '/our-team' || path === '/our-people') {
+      navigateToTeam();
+    } else if (path.startsWith('/our-team/')) {
+      const slug = path.replace('/our-team/', '').replace(/\/$/, '');
+      navigateToPartner(slug);
+    } else if (path.startsWith('/our-people/')) {
+      const slug = path.replace('/our-people/', '').replace(/\/$/, '');
+      navigateToPartner(slug);
     } else if (path === '/practice-areas' || path === '/expertise') {
       navigateToPracticeOverview();
     } else if (path.startsWith('/practice-areas/') || path.startsWith('/expertise/')) {
@@ -387,7 +485,26 @@ export default function App() {
       <Header currentPath={currentPath} onNavigate={handleGlobalNavigate} />
 
       <main id="main-content" className="flex-grow">
-        {activePractice ? (
+        {activePartner ? (
+          /* ========================================================
+             0a. PARTNER PROFILE TEMPLATE (/our-team/[slug])
+             ======================================================== */
+          <PartnerProfile
+            partner={activePartner}
+            onNavigateTeam={navigateToTeam}
+            onNavigateHome={navigateToLanding}
+            onNavigatePractice={navigateToPractice}
+            onNavigateArticle={navigateToArticle}
+          />
+        ) : currentPath === '/our-team' ? (
+          /* ========================================================
+             0b. OUR TEAM PAGE (/our-team)
+             ======================================================== */
+          <OurTeam
+            onNavigateHome={navigateToLanding}
+            onSelectPartner={navigateToPartner}
+          />
+        ) : activePractice ? (
           /* ========================================================
              1. PRACTICE AREA DETAIL TEMPLATE (/practice-areas/[slug])
              ======================================================== */
@@ -541,6 +658,10 @@ export default function App() {
         isPracticeOverview={isPracticeOverview}
         onNavigatePractice={(slug) => navigateToPractice(slug)}
         onNavigatePracticeOverview={() => navigateToPracticeOverview()}
+        isTeamPage={currentPath === '/our-team'}
+        onNavigateTeam={() => navigateToTeam()}
+        selectedPartner={activePartner}
+        onNavigatePartner={(slug) => navigateToPartner(slug)}
       />
     </div>
   );

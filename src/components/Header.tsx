@@ -11,6 +11,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath = '/insights', onNav
 
   const isInsightsActive = currentPath.startsWith('/insights');
   const isPracticeActive = currentPath.startsWith('/practice-areas') || currentPath.startsWith('/expertise');
+  const isTeamActive = currentPath === '/our-team' || currentPath.startsWith('/our-team') || currentPath.startsWith('/our-people');
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
     if (onNavigate) {
@@ -77,10 +78,17 @@ export const Header: React.FC<HeaderProps> = ({ currentPath = '/insights', onNav
             )}
           </a>
           <a
-            href="/our-people"
-            className="text-[14px] text-[#5F5D55] hover:text-[#16233F] transition-colors font-medium focus-visible:outline-2 focus-visible:outline-[#16233F]"
+            href="/our-team"
+            onClick={(e) => handleLinkClick(e, '/our-team')}
+            aria-current={isTeamActive ? 'page' : undefined}
+            className={`relative text-[14px] transition-colors font-medium focus-visible:outline-2 focus-visible:outline-[#16233F] ${
+              isTeamActive ? 'text-[#16233F] font-semibold py-1' : 'text-[#5F5D55] hover:text-[#16233F]'
+            }`}
           >
-            Our people
+            Our team
+            {isTeamActive && (
+              <span className="absolute bottom-[-4px] left-0 right-0 h-[2px] bg-[#7A2142]" />
+            )}
           </a>
           <a
             href="/insights"
@@ -144,11 +152,16 @@ export const Header: React.FC<HeaderProps> = ({ currentPath = '/insights', onNav
               Practice areas
             </a>
             <a
-              href="/our-people"
-              className="text-[16px] text-[#5F5D55] hover:text-[#16233F] py-2"
-              onClick={(e) => handleLinkClick(e, '/our-people')}
+              href="/our-team"
+              aria-current={isTeamActive ? 'page' : undefined}
+              className={`text-[16px] py-2 ${
+                isTeamActive
+                  ? 'text-[#16233F] font-semibold border-l-2 border-[#7A2142] pl-3'
+                  : 'text-[#5F5D55] hover:text-[#16233F]'
+              }`}
+              onClick={(e) => handleLinkClick(e, '/our-team')}
             >
-              Our people
+              Our team
             </a>
             <a
               href="/insights"

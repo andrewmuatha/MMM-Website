@@ -27,14 +27,9 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
     height: 0,
   });
 
-  // TOC only renders when there are 3 or more H2s
-  if (!headings || headings.length < 3) {
-    return null;
-  }
-
   // Update active indicator bar position on desktop
   useEffect(() => {
-    if (!listRef.current) return;
+    if (!headings || headings.length < 3 || !listRef.current) return;
     const activeIndex = headings.findIndex((h) => h.id === activeId);
     if (activeIndex >= 0) {
       const activeEl = listRef.current.children[activeIndex] as HTMLElement;
@@ -49,6 +44,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
 
   // Show mobile/tablet dropdown only after scrolling past header (e.g. 350px)
   useEffect(() => {
+    if (!headings || headings.length < 3) return;
     const handleScroll = () => {
       if (window.scrollY > 350) {
         setDropdownVisible(true);
@@ -59,10 +55,11 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [headings]);
 
   // Handle escape key to close mobile dropdown
   useEffect(() => {
+    if (!headings || headings.length < 3) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && dropdownOpen) {
         setDropdownOpen(false);
@@ -70,7 +67,12 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [dropdownOpen]);
+  }, [dropdownOpen, headings]);
+
+  // TOC only renders when there are 3 or more H2s
+  if (!headings || headings.length < 3) {
+    return null;
+  }
 
   const currentHeading = headings.find((h) => h.id === activeId) || headings[0];
 
